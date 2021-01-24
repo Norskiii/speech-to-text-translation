@@ -20,7 +20,7 @@ Dependencies are defined in `requirements.txt` and `requirements_gpu.txt`.
    ```
    $ git clone https://github.com/Norskiii/speech-to-text-translation.git
    ```
-2. Create a virtual environment and activate it:
+2. Create a virtual environment and activate it (optional but recommended):
 
    You can replace `$HOME/tmp/deepspeech-venv/` with any directory path.
 
@@ -47,3 +47,16 @@ Dependencies are defined in `requirements.txt` and `requirements_gpu.txt`.
       ```
       $ pip3 install -r requirements.txt
       ```
+
+## How to use
+
+```
+usage: avatar_speech_to_txt.py [-h] --input INPUT --output OUTPUT
+
+Translate speech to text and save text to file
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --input INPUT    Path to the input audio file (.wav)
+  --output OUTPUT  Path to the output text file (.txt)
+```
