@@ -1,0 +1,4 @@
+numpy==1.19.5
+librosa==0.8.0
+deepspeech_gpu==0.9.3
+deepspeech==0.9.3
