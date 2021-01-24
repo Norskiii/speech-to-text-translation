@@ -4,12 +4,21 @@ import librosa as lb
 from deepspeech import Model
 
 
+def extension_check(file, extension, file_use):
+    if not file.endswith(extension):
+        raise argparse.ArgumentTypeError('{} file must be of type {}'.format(file_use, extension))
+    return file
+
+
 def main():
-    parser = argparse.ArgumentParser(description='Audio-to-text translation')
+    parser = argparse.ArgumentParser(description='Translate speech to text and save text to file')
     parser.add_argument('--input', required=True,
-                        help='Path to the input audio file (.wav)')
+                        help='Path to the input audio file (.wav)',
+                        type=lambda f: extension_check(f, '.wav', 'Input audio'))
     parser.add_argument('--output', required=True,
-                        help='Path to the output text file (.txt)')
+                        help='Path to the output text file (.txt)',
+                        type=lambda f: extension_check(f, '.txt', 'Output'))
+
     args = parser.parse_args()
 
     print('Loading model')
@@ -33,10 +42,9 @@ def main():
     # Perform speech to text translation
     text = ds.stt(audio)
 
-    # Write text to file
-    file = open(args.output, 'w')
-    file.write(text)
-    file.close()
+    # Write translation to file
+    with open(args.output, 'w') as file:
+        file.write(text)
 
 
 if __name__ == '__main__':
