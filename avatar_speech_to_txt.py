@@ -13,12 +13,11 @@ def main():
     args = parser.parse_args()
 
     print('Loading model')
-    # !!! Define model file here !!!
-    ds = Model('deepspeech-0.9.3-models.pbmm')
+    ds = Model('deepspeech-{}-models.pbmm'.format('0.9.3'))  # <- define model version here
     desired_sample_rate = ds.sampleRate()
 
     print('Loading scorer')
-    ds.enableExternalScorer('deepspeech-0.9.3-models.scorer')
+    ds.enableExternalScorer('deepspeech-{}-models.scorer'.format('0.9.3'))  # <- define scorer version here
 
     print('Reading audio file')
     audio, audio_sample_rate = lb.load(args.input, sr=None)
