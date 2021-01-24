@@ -17,6 +17,9 @@ def main():
     ds = Model('deepspeech-0.9.3-models.pbmm')
     desired_sample_rate = ds.sampleRate()
 
+    print('Loading scorer')
+    ds.enableExternalScorer('deepspeech-0.9.3-models.scorer')
+
     print('Reading audio file')
     audio, audio_sample_rate = lb.load(args.input, sr=None)
 
@@ -29,7 +32,7 @@ def main():
     audio = (audio*32768).astype(np.int16)
 
     # Perform speech to text translation
-    print(ds.stt(audio))
+    print('Output: {}'.format(ds.stt(audio)))
 
 
 if __name__ == '__main__':
