@@ -31,7 +31,12 @@ def main():
     audio = (audio*32768).astype(np.int16)
 
     # Perform speech to text translation
-    print('Output: {}'.format(ds.stt(audio)))
+    text = ds.stt(audio)
+
+    # Write text to file
+    file = open(args.output, 'w')
+    file.write(text)
+    file.close()
 
 
 if __name__ == '__main__':
