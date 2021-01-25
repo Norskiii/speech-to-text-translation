@@ -10,11 +10,7 @@ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0
 ```
 DeepSpeech documentation encourages the use of virtual environments. More information on using a virtual environment and installing the DeepSpeech package can be found [here](https://deepspeech.readthedocs.io/en/v0.9.3/USING.html#using-the-python-package).
 
-## Dependencies
-
-Dependencies are defined in `requirements.txt` and `requirements_gpu.txt`. 
-
-## Installation on Linux
+## Setup on Linux
 
 1. Clone speech-to-text-translation to current directory:
    ```
