@@ -36,13 +36,13 @@ def main():
               'Resampling might affect speech recognition.'.format(audio_sample_rate, desired_sample_rate))
         audio = lb.resample(audio, audio_sample_rate, desired_sample_rate)
 
-    # Convert audio from float32 to int16
+    # DeepSpeech requires the audio to be type int16
     audio = (audio*32768).astype(np.int16)
 
     # Perform speech to text translation
     text = ds.stt(audio)
 
-    # Write translation to file
+    # Write translation to output file
     with open(args.output, 'w') as file:
         file.write(text)
 
