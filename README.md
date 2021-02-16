@@ -16,24 +16,16 @@ DeepSpeech documentation encourages the use of virtual environments. More inform
    ```
    $ git clone https://github.com/Norskiii/speech-to-text-translation.git
    ```
-2. Create a virtual environment and activate it (optional but recommended):
-
-   You can replace `$HOME/tmp/deepspeech-venv/` with any directory path.
-
-   ```
-   $ virtualenv -p python3 $HOME/tmp/deepspeech-venv/
-   $ source $HOME/tmp/deepspeech-venv/bin/activate
-   ```
-3. Move to the project directory:
+2. Move to the project directory:
    ``` 
    $ cd speech-to-text-translation 
    ```
-4. Download the pre-trained model files:
+3. Download the pre-trained model files:
    ```
    $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
    $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
    ```
-5. Install dependencies:
+4. Install dependencies:
 
    * Systems with the required [CUDA dependency](https://deepspeech.readthedocs.io/en/v0.9.3/USING.html#cuda-dependency-inference) and a supported NVIDIA GPU    ([Compute Capability](https://developer.nvidia.com/cuda-gpus) at least 3.0):
       ``` 
@@ -43,16 +35,3 @@ DeepSpeech documentation encourages the use of virtual environments. More inform
       ```
       $ pip3 install -r requirements.txt
       ```
-
-## How to use
-
-```
-usage: avatar_speech_to_txt.py [-h] --input INPUT --output OUTPUT
-
-Translate speech to text and save text to file
-
-optional arguments:
-  -h, --help       show this help message and exit
-  --input INPUT    Path to the input audio file (.wav)
-  --output OUTPUT  Path to the output text file (.txt)
-```
