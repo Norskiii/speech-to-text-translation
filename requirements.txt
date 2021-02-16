@@ -1,3 +1,7 @@
-numpy==1.19.5
-librosa==0.8.0
 deepspeech==0.9.3
+nemo_toolkit==1.0.0b3
+SoundFile==0.10.3.post1
+numpy==1.19.2
+librosa==0.8.0
+nemo==3.7.0
+sounddevice==0.4.1
