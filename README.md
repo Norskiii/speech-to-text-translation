@@ -22,7 +22,7 @@ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0
    ```
 2. Move to the project directory:
    ``` 
-   $ cd speech-to-text-translation/models
+   $ cd speech-to-text-translation
    ```
 3. Download the pre-trained models:
    * DeepSpeech model:
