@@ -7,8 +7,8 @@ In the baseline version, translation from speech to text is done using an open-s
 wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
 wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
 ```
-## QuartzNet
-QuartzNet is an automatic speech recognition model that is supported by [NVIDIA NeMo toolkit](https://github.com/NVIDIA/NeMo). It can achieve better word-error-rates when compared to DeepSpeech, so most likely it will be used in the final version of Deep Speaking Avatar STT.
+## Jasper and QuartzNet
+[NVIDIA NeMo toolkit](https://github.com/NVIDIA/NeMo) offers pre-build Jasper and QuartzNet speech recognition models. Both can achieve better word-error-rates when compared to DeepSpeech, so most likely one of them will be used for final model.
 
 ## Requirements
 1. Python 3.6 or above
@@ -22,20 +22,23 @@ QuartzNet is an automatic speech recognition model that is supported by [NVIDIA 
    ```
 2. Move to the project directory:
    ``` 
-   $ cd speech-to-text-translation 
+   $ cd speech-to-text-translation/models
    ```
-3. Download the pre-trained DeepSpeech model files:
-   ```
-   $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
-   $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
-   ```
+3. Download the pre-trained models:
+   * DeepSpeech model:
+      ```
+      $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
+      $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
+      ```
+   * Jasper model: 
+      ```
+      $ wget https://api.ngc.nvidia.com/v2/models/nvidia/nemospeechmodels/versions/1.0.0a5/files/Jasper10x5Dr-En.nemo
+      ```
+   * QuartzNet model:
+      ```
+      $ wget https://api.ngc.nvidia.com/v2/models/nvidia/nemospeechmodels/versions/1.0.0a5/files/QuartzNet15x5Base-En.nemo
+      ```
 4. Install dependencies:
-
-   * Systems with the required [CUDA dependency](https://deepspeech.readthedocs.io/en/v0.9.3/USING.html#cuda-dependency-inference) and a supported NVIDIA GPU    ([Compute Capability](https://developer.nvidia.com/cuda-gpus) at least 3.0):
-      ``` 
-      $ pip3 install -r requirements_gpu.txt 
-      ```
-   * Other systems:
-      ```
-      $ pip3 install -r requirements.txt
-      ```
+   ```
+   $ pip3 install -r requirements.txt
+   ```
