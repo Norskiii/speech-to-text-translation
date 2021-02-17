@@ -21,8 +21,8 @@ def extension_check(file, extension, file_use):
 
 def main():
     # Model and scorer file paths
-    scorer_path = os.path.join(os.getcwd(), 'models/deepspeech-0.9.3-models.scorer')
-    model_path = os.path.join(os.getcwd(), 'models/deepspeech-0.9.3-models.pbmm')
+    scorer_path = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.scorer')
+    model_path = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.pbmm')
 
     parser = argparse.ArgumentParser(description='Translate speech to text and save text to file')
     parser.add_argument('--i', metavar='INPUT', required=True,

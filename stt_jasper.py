@@ -19,7 +19,7 @@ def extension_check(file, extension, file_use):
 
 def main():
     # Model file location 
-    model_path = os.path.join(os.getcwd(),'models/Jasper10x5Dr-En.nemo')
+    model_path = os.path.join(os.getcwd(),'Jasper10x5Dr-En.nemo')
 
     # Load model
     jasper = nemo_asr.models.EncDecCTCModel.restore_from(model_path)

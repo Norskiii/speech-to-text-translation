@@ -19,7 +19,7 @@ def extension_check(file, extension, file_use):
 
 def main():
     # Model file location 
-    model_path = os.path.join(os.getcwd(),'models/QuartzNet15x5Base-En.nemo')
+    model_path = os.path.join(os.getcwd(),'QuartzNet15x5Base-En.nemo')
 
     # Load model
     quartznet = nemo_asr.models.EncDecCTCModel.restore_from(model_path)
