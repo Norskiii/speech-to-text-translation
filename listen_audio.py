@@ -1,3 +1,7 @@
+#-------------------------------------------------
+# Uses user input to listen and save 5s audio clip
+#-------------------------------------------------
+
 import sounddevice as sd
 import soundfile as sf
 

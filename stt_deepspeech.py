@@ -1,3 +1,7 @@
+#-------------------------------------------------------------
+# Speech-to-text translation with pre-trained DeepSpeech model
+#-------------------------------------------------------------
+
 import argparse
 import numpy as np
 import librosa as lb
@@ -9,12 +13,17 @@ import os
 
 
 def extension_check(file, extension, file_use):
+    """ Check argparse argument file extension """
     if not file.endswith(extension):
         raise argparse.ArgumentTypeError('{} file must be of type {}'.format(file_use, extension))
     return file
 
 
 def main():
+    # Model and scorer file paths
+    scorer_path = os.path.join(os.getcwd(), 'models/deepspeech-0.9.3-models.scorer')
+    model_path = os.path.join(os.getcwd(), 'models/deepspeech-0.9.3-models.pbmm')
+
     parser = argparse.ArgumentParser(description='Translate speech to text and save text to file')
     parser.add_argument('--i', metavar='INPUT', required=True,
                         help='Path to the input audio file (.wav)',
@@ -25,23 +34,23 @@ def main():
 
     args = parser.parse_args()
 
-    # file check
+    # file location check
     if os.path.isfile(args.i):
         print('Reading audio file')
         audio, audio_sample_rate = lb.load(args.i, sr=None)
     else:
-        print("Input audio file not found, exiting")
+        print('Input audio file not found, exiting')
         return
-
+    
     start_time = time.time()
     print('Loading model')
-    ds = Model('deepspeech-{}-models.pbmm'.format('0.9.3'))  # <- define model version here
+    ds = Model(model_path)
     desired_sample_rate = ds.sampleRate()
     print('Model loaded in', str(np.round((time.time() - start_time),3)), 'seconds')
 
     start_time = time.time()
     print('Loading scorer')
-    ds.enableExternalScorer('deepspeech-{}-models.scorer'.format('0.9.3'))  # <-define scorer version
+    ds.enableExternalScorer(scorer_path)
     print('Scorer loaded in', str(np.round((time.time() - start_time),3)), 'seconds')
 
     if audio_sample_rate != desired_sample_rate:
@@ -63,3 +72,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
