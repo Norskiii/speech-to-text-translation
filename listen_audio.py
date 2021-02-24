@@ -7,7 +7,7 @@ import soundfile as sf
 
 samplerate = 16000  # Hertz
 duration = 5  # seconds
-filename = 'stt_input.wav'
+filename = '/home/avatar/integration/stt_input.wav'
 
 while(True):
     choice = input("Press 'r' to record 5 second audio clip or 'q' to exit \n")

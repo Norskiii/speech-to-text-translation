@@ -3,5 +3,4 @@ librosa==0.8.0
 numpy==1.19.2
 nemo_toolkit==1.0.0b3
 sounddevice==0.4.1
-deepspeech==0.9.3
 nemo==3.7.0
