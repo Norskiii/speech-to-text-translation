@@ -1,5 +1,5 @@
 # Install packages required by Nemo Toolkit
-apt-get update && apt-get install -y libsndfile1 ffmpeg
+sudo apt-get update && sudo apt-get install -y libsndfile1 ffmpeg
 
 # Install pip requirements
 pip3 install -r requirements.txt

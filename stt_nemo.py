@@ -9,6 +9,8 @@ import argparse
 import time
 import numpy as np
 
+DEFAULT_INPUT_PATH = '/home/avatar/integration/stt_input.wav'
+DEFAULT_OUTPUT_PATH = '/home/avatar/integration/stt_output.txt'
 
 def extension_check(file, extension, file_use):
     """ Check argparse argument file extension """
@@ -23,11 +25,11 @@ def main():
     jasper_path = os.path.join(os.getcwd(), 'Jasper10x5Dr-En.nemo')
 
     parser = argparse.ArgumentParser(description='Translate speech to text and save text to file')
-    parser.add_argument('--i', metavar='INPUT', required=True,
-                        help='Path to the input audio file (.wav)',
+    parser.add_argument('--i', metavar='INPUT', nargs='?', const=DEFAULT_INPUT_PATH,
+            help='Path to the input audio file (default: {})'.format(DEFAULT_INPUT_PATH),
                         type=lambda f: extension_check(f, '.wav', 'Input audio'))
-    parser.add_argument('--o', metavar='OUTPUT', required=True,
-                        help='Path to the output text file (.txt)',
+    parser.add_argument('--o', metavar='OUTPUT', nargs='?', const=DEFAULT_OUTPUT_PATH,
+            help='Path to the output text file (default: {})'.format(DEFAULT_OUTPUT_PATH),
                         type=lambda f: extension_check(f, '.txt', 'Output'))
     parser.add_argument('-jasper', dest='model', action='store_const',
                         const='jasper', default='quartznet',
