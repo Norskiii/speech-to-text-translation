@@ -1,7 +1,3 @@
-#-------------------------------------------------------------
-# Speech-to-text translation with pre-trained DeepSpeech model
-#-------------------------------------------------------------
-
 import numpy as np
 import librosa as lb
 from deepspeech import Model

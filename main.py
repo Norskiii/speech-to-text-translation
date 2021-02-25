@@ -3,17 +3,20 @@ import argparse
 import time
 import stt_nemo
 import stt_deepspeech
+import evaluation
 import numpy as np
 
-# Input and output paths
-DEFAULT_INPUT_PATH = '/home/avatar/integration/stt_input.wav'
-DEFAULT_OUTPUT_PATH = '/home/avatar/integration/stt_input.wav'
 
-# Model paths
+DEFAULT_INPUT_PATH = '/home/avatar/integration/stt_input.wav'
+DEFAULT_OUTPUT_PATH = '/home/avatar/integration/stt_input.txt'
+
 QUARTZNET_MODEL_PATH = os.path.join(os.getcwd(), 'QuartzNet15x5Base-En.nemo')
 JASPER_MODEL_PATH = os.path.join(os.getcwd(), 'Jasper10x5Dr-En.nemo')
 DEEPSPEECH_MODEL_PATH = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.pbmm')
 DEEPSPEECH_SCORER_PATH = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.scorer')
+
+TEST_INPUT_PATH = '/home/avatar/stt_test/stt_input.wav'
+TEST_OUTPUT_PATH = '/home/avatar/stt_test/stt_output.txt'
 
 
 def extension_check(file, extension, file_use):
@@ -36,6 +39,37 @@ def load_model(model_name):
         return stt_deepspeech.load_model(DEEPSPEECH_MODEL_PATH, DEEPSPEECH_SCORER_PATH)
 
 
+def loop(model, model_name, input_path, output_path):
+    """ Infinite loop that reads input audio file and transcribes it when changes are detected. """
+    prev_mod_time = time.time()
+    while True:
+        # File location check
+        if os.path.isfile(input_path):
+            mod_time = os.stat(input_path)[8]
+            if mod_time == prev_mod_time:
+                print('Waiting for changes in input file', end='\r')
+                time.sleep(1)
+            else:
+                prev_mod_time = mod_time
+                print('\n Reading audio file')
+                start_time = time.time()
+
+                if model_name == 'deepspeech':
+                    text = stt_deepspeech.speech_to_text(model, input_path)
+                else:
+                    text = stt_nemo.speech_to_text(model, input_path)
+
+                print('Transcription finished in {} seconds'.format(np.round((time.time() - start_time), 3)))
+                print('Output: {}'.format(text))
+
+                # Write translation to output file
+                with open(output_path, 'w') as file:
+                    file.write(text)
+        else:
+            print('Input audio file not found, exiting')
+            return
+
+
 def main():
     parser = argparse.ArgumentParser(description='Translate speech to text and save text to file')
     parser.add_argument('--i', metavar='INPUT', nargs='?', const=DEFAULT_INPUT_PATH,
@@ -50,6 +84,10 @@ def main():
     parser.add_argument('-deepspeech', dest='model', action='store_const',
                         const='deepspeech', default='quartznet',
                         help='Use DeepSpeech model (default: QuartzNet)')
+    parser.add_argument('-evaluate', dest='evaluate', action='store_const',
+                        const=True, default=False,
+                        help='Evaluate the models word error rate and time consumption. '
+                             'Given INPUT and/or OUTPUT will be ignored')
 
     args = parser.parse_args()
 
@@ -57,33 +95,13 @@ def main():
     model = load_model(args.model)
     print('Model loaded in {} seconds'.format(np.round((time.time() - start_time), 3)))
 
-    prev_mod_time = time.time()
-    while True:
-        # File location check
-        if os.path.isfile(args.i):
-            mod_time = os.stat(args.i)[8]
-            if mod_time == prev_mod_time:
-                print('Waiting for changes in input file', end='\r')
-                time.sleep(1)
-            else:
-                prev_mod_time = mod_time
-                print('\n Reading audio file')
-                start_time = time.time()
-
-                if args.model == 'deepspeech':
-                    text = stt_deepspeech.speech_to_text(model, args.i)
-                else:
-                    text = stt_nemo.speech_to_text(model, args.i)
-
-                print('Transcription finished in {} seconds'.format(np.round((time.time() - start_time), 3)))
-                print(text)
-
-                # Write translation to output file
-                with open(args.o, 'w') as file:
-                    file.write(text)
+    if args.evaluate:
+        if args.model == 'deepspeech':
+            evaluation.evaluate_deepspeech_model()
         else:
-            print('Input audio file not found, exiting')
-            return
+            evaluation.evaluate_nemo_model()
+    else:
+        loop(model, args.model, args.i, args.o)
 
 
 if __name__ == '__main__':

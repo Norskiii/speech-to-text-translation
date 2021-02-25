@@ -1,7 +1,3 @@
-#------------------------------------------------------------
-# Speech-to-text translation with pre-trained NeMo models
-#------------------------------------------------------------
-
 import nemo.collections.asr as nemo_asr
 
 
