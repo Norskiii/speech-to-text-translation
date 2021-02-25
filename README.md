@@ -9,33 +9,15 @@ In the baseline version, translation from speech to text is done using an open-s
 
 ## Requirements
 1. Python 3.6 or above
-2. Pytorch 1.7.1 or above
+2. Pip3
 
 ## Setup on Linux
+ Run 'setup.sh' to install all needed dependencies and pre-trained models:
+ ``` 
+   $ ./setup.sh
+   ```
 
-1. Clone speech-to-text-translation to current directory:
-   ```
-   $ git clone https://github.com/Norskiii/speech-to-text-translation.git
-   ```
-2. Move to the project directory:
-   ``` 
-   $ cd speech-to-text-translation
-   ```
-3. Download the pre-trained models:
-   * DeepSpeech model:
-      ```
-      $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
-      $ wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
-      ```
-   * Jasper model: 
-      ```
-      $ wget https://api.ngc.nvidia.com/v2/models/nvidia/nemospeechmodels/versions/1.0.0a5/files/Jasper10x5Dr-En.nemo
-      ```
-   * QuartzNet model:
-      ```
-      $ wget https://api.ngc.nvidia.com/v2/models/nvidia/nemospeechmodels/versions/1.0.0a5/files/QuartzNet15x5Base-En.nemo
-      ```
-4. Install dependencies:
-   ```
-   $ pip3 install -r requirements.txt
-   ```
+## Usage
+* DeepSpeech:
+
+* QuartzNet and Jasper:
