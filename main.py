@@ -9,10 +9,10 @@ import numpy as np
 DEFAULT_INPUT_PATH = '/home/avatar/integration/stt_input.wav'
 DEFAULT_OUTPUT_PATH = '/home/avatar/integration/stt_output.txt'
 
-QUARTZNET_MODEL_PATH = os.path.join(os.getcwd(), 'QuartzNet15x5Base-En.nemo')
-JASPER_MODEL_PATH = os.path.join(os.getcwd(), 'Jasper10x5Dr-En.nemo')
-DEEPSPEECH_MODEL_PATH = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.pbmm')
-DEEPSPEECH_SCORER_PATH = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.scorer')
+QUARTZNET_MODEL_PATH = 'QuartzNet15x5Base-En.nemo'
+JASPER_MODEL_PATH = 'Jasper10x5Dr-En.nemo'
+DEEPSPEECH_MODEL_PATH = 'deepspeech-0.9.3-models.pbmm'
+DEEPSPEECH_SCORER_PATH = 'deepspeech-0.9.3-models.scorer'
 
 EVALUATION_DATASET_PATHS = ['LibriSpeech/test-clean',
                             'LibriSpeech/test-other',
