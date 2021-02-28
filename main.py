@@ -3,20 +3,21 @@ import argparse
 import time
 import stt_nemo
 import stt_deepspeech
-import evaluation
 import numpy as np
 
 
 DEFAULT_INPUT_PATH = '/home/avatar/integration/stt_input.wav'
-DEFAULT_OUTPUT_PATH = '/home/avatar/integration/stt_input.txt'
+DEFAULT_OUTPUT_PATH = '/home/avatar/integration/stt_output.txt'
 
 QUARTZNET_MODEL_PATH = os.path.join(os.getcwd(), 'QuartzNet15x5Base-En.nemo')
 JASPER_MODEL_PATH = os.path.join(os.getcwd(), 'Jasper10x5Dr-En.nemo')
 DEEPSPEECH_MODEL_PATH = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.pbmm')
 DEEPSPEECH_SCORER_PATH = os.path.join(os.getcwd(), 'deepspeech-0.9.3-models.scorer')
 
-TEST_INPUT_PATH = '/home/avatar/stt_test/stt_input.wav'
-TEST_OUTPUT_PATH = '/home/avatar/stt_test/stt_output.txt'
+EVALUATION_DATASET_PATHS = ['LibriSpeech/test-clean',
+                            'LibriSpeech/test-other',
+                            'LibriSpeech/dev-clean',
+                            'LibriSpeech/dev-other']
 
 
 def extension_check(file, extension, file_use):
@@ -70,6 +71,15 @@ def loop(model, model_name, input_path, output_path):
             return
 
 
+def write_results_to_file(path, results):
+    print(results)
+    with open(path, 'w') as file:
+        file.write('dataset, WER (%), time per file\n')
+        for i in range(len(results[0])):
+            file.write(', '.join([str(results[0][i]), str(results[1][i]*100), ''.join([str(results[2][i]), '\n'])]))
+    print('Evaluation results saved to', path)
+
+
 def main():
     parser = argparse.ArgumentParser(description='Translate speech to text and save text to file')
     parser.add_argument('--i', metavar='INPUT', nargs='?', const=DEFAULT_INPUT_PATH,
@@ -86,7 +96,7 @@ def main():
                         help='Use DeepSpeech model (default: QuartzNet)')
     parser.add_argument('-evaluate', dest='evaluate', action='store_const',
                         const=True, default=False,
-                        help='Evaluate the models word error rate and time consumption. '
+                        help='Evaluate model word error rate and time consumption. '
                              'Given INPUT and/or OUTPUT will be ignored')
 
     args = parser.parse_args()
@@ -97,9 +107,11 @@ def main():
 
     if args.evaluate:
         if args.model == 'deepspeech':
-            evaluation.evaluate_deepspeech_model()
+            write_results_to_file('-'.join([args.model, 'evaluation.txt']),
+                                  stt_deepspeech.evaluate(model, EVALUATION_DATASET_PATHS))
         else:
-            evaluation.evaluate_nemo_model()
+            write_results_to_file('-'.join([args.model, 'evaluation.txt']),
+                                  stt_nemo.evaluate(model, EVALUATION_DATASET_PATHS))
     else:
         loop(model, args.model, args.i, args.o)
 
