@@ -12,12 +12,23 @@ In the baseline version, translation from speech to text is done using an open-s
 2. Pip3
 
 ## Setup on Linux
- Run 'setup.sh' to install all needed dependencies and pre-trained models:
- ``` 
-   $ ./setup.sh
-   ```
+Run 'setup.sh' to install all needed dependencies and pre-trained models:
+``` 
+$ ./setup.sh
+```
 
-## Usage
-* DeepSpeech:
+## How to use
+``` 
+usage: main.py [-h] [--i [INPUT]] [--o [OUTPUT]] [-jasper] [-deepspeech] [-evaluate]
 
-* QuartzNet and Jasper:
+Translate speech to text and save text to file
+
+optional arguments:
+  -h, --help    show this help message and exit
+  --i [INPUT]   Path to the input audio file (default: /home/avatar/integration/stt_input.wav)
+  --o [OUTPUT]  Path to the output text file (default: /home/avatar/integration/stt_output.txt)
+  -jasper       Use Jasper model (default: QuartzNet)
+  -deepspeech   Use DeepSpeech model (default: QuartzNet)
+  -evaluate     Evaluate model word error rate and time consumption. Given INPUT and/or OUTPUT will be
+                ignored
+``` 
