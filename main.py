@@ -106,10 +106,10 @@ def main():
 
     if args.evaluate:
         if args.model == 'deepspeech':
-            write_results_to_file('-'.join([args.model, 'evaluation.txt']),
+            write_results_to_file('/'.join(['LibriSpeech_results', '-'.join([args.model, 'evaluation.txt'])]),
                                   stt_deepspeech.evaluate(model, EVALUATION_DATASET_PATHS))
         else:
-            write_results_to_file('-'.join([args.model, 'evaluation.txt']),
+            write_results_to_file('/'.join(['LibriSpeech_results', '-'.join([args.model, 'evaluation.txt'])]),
                                   stt_nemo.evaluate(model, EVALUATION_DATASET_PATHS))
     else:
         loop(model, args.model, args.i, args.o)
