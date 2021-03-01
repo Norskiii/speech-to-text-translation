@@ -72,7 +72,6 @@ def loop(model, model_name, input_path, output_path):
 
 
 def write_results_to_file(path, results):
-    print(results)
     with open(path, 'w') as file:
         file.write('dataset, WER (%), time per file\n')
         for i in range(len(results[0])):
