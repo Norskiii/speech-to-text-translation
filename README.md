@@ -17,6 +17,8 @@ Run 'setup.sh' to install all needed dependencies and pre-trained models:
 $ ./setup.sh
 ```
 
+Evaluating the models also requires LibriSpeech dev and test datasets, available at https://www.openslr.org/12.
+
 ## How to use
 ``` 
 usage: main.py [-h] [--i [INPUT]] [--o [OUTPUT]] [-jasper] [-deepspeech] [-evaluate]
