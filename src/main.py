@@ -9,15 +9,15 @@ import numpy as np
 DEFAULT_INPUT_PATH = '/home/avatar/integration/stt_input.wav'
 DEFAULT_OUTPUT_PATH = '/home/avatar/integration/stt_output.txt'
 
-QUARTZNET_MODEL_PATH = 'QuartzNet15x5Base-En.nemo'
-JASPER_MODEL_PATH = 'Jasper10x5Dr-En.nemo'
-DEEPSPEECH_MODEL_PATH = 'deepspeech-0.9.3-models.pbmm'
-DEEPSPEECH_SCORER_PATH = 'deepspeech-0.9.3-models.scorer'
+QUARTZNET_MODEL_PATH = os.path.join(os.getcwd(), '..', 'QuartzNet15x5Base-En.nemo')
+JASPER_MODEL_PATH = os.path.join(os.getcwd(), '..', 'Jasper10x5Dr-En.nemo')
+DEEPSPEECH_MODEL_PATH = os.path.join(os.getcwd(), '..', 'deepspeech-0.9.3-models.pbmm')
+DEEPSPEECH_SCORER_PATH = os.path.join(os.getcwd(), '..', 'deepspeech-0.9.3-models.scorer')
 
-EVALUATION_DATASET_PATHS = ['LibriSpeech/test-clean',
-                            'LibriSpeech/test-other',
-                            'LibriSpeech/dev-clean',
-                            'LibriSpeech/dev-other']
+EVALUATION_DATASET_PATHS = [os.path.join(os.getcwd(), '..', 'LibriSpeech/test-clean'),
+                            os.path.join(os.getcwd(), '..', 'LibriSpeech/test-other'),
+                            os.path.join(os.getcwd(), '..', 'LibriSpeech/dev-clean'),
+                            os.path.join(os.getcwd(), '..', 'LibriSpeech/dev-other')]
 
 
 def extension_check(file, extension, file_use):
@@ -106,10 +106,12 @@ def main():
 
     if args.evaluate:
         if args.model == 'deepspeech':
-            write_results_to_file('/'.join(['LibriSpeech_results', '-'.join([args.model, 'evaluation.txt'])]),
+            write_results_to_file(os.path.join(os.getcwd(), '..', 'LibriSpeech_evaluation_results',
+                                               '-'.join([args.model, 'evaluation.txt'])),
                                   stt_deepspeech.evaluate(model, EVALUATION_DATASET_PATHS))
         else:
-            write_results_to_file('/'.join(['LibriSpeech_results', '-'.join([args.model, 'evaluation.txt'])]),
+            write_results_to_file(os.path.join(os.getcwd(), '..', 'LibriSpeech_evaluation_results',
+                                               '-'.join([args.model, 'evaluation.txt'])),
                                   stt_nemo.evaluate(model, EVALUATION_DATASET_PATHS))
     else:
         loop(model, args.model, args.i, args.o)
