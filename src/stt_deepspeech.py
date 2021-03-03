@@ -18,7 +18,7 @@ def speech_to_text(model, audio_file_path):
     if audio_sample_rate != model.sampleRate():
         print('Warning: input audio sample rate ({}) is different than the desired sampling rate ({}). '
               'Resampling might affect speech recognition.'.format(audio_sample_rate, model.sampleRate()))
-        audio = lb.resample(audio, audio_sample_rate, model.sampleRate)
+        audio = lb.resample(audio, audio_sample_rate, model.sampleRate())
 
     # DeepSpeech requires the audio to be type int16
     audio = (audio * 32768).astype(np.int16)
