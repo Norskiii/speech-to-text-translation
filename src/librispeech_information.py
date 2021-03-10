@@ -2,6 +2,7 @@ import os
 import soundfile as sf
 import numpy as np
 from tabulate import tabulate
+import matplotlib.pyplot as plt
 
 
 def get_audio_durations(audio_paths):
@@ -44,6 +45,18 @@ def print_length_information(dataset_names, num_of_files, mean_l, min_l, max_l, 
 
     table.append(['all datasets', len(all_audio_l), np.mean(all_audio_l), np.min(all_audio_l), np.max(all_audio_l)])
     print(tabulate(table, headers=headers))
+
+
+def print_histograms(audio_durations, audio_lengths):
+    plt.hist(audio_durations, bins="auto")
+    plt.ylabel('Number of audio files')
+    plt.xlabel('Audio file length in seconds')
+    plt.show()
+
+    plt.hist(audio_lengths, bins="auto")
+    plt.ylabel('Number of audio files')
+    plt.xlabel('Number of words in audio file transcription')
+    plt.show()
 
 
 def main():
@@ -111,6 +124,8 @@ def main():
     print(' ')
     print(' ')
     print_length_information(dataset_names, num_of_files, mean_l, min_l, max_l, all_audio_l)
+
+    print_histograms(all_audio_d, all_audio_l)
 
 
 if __name__ == '__main__':
