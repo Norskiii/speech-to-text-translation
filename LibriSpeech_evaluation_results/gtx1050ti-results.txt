@@ -1,0 +1,14 @@
+QuartzNet results:
+dataset, WER (%), time per file
+test-clean, 3.8705873402312845, 0.04935427594730872
+test-other, 10.039546835297939, 0.04463026311860761
+dev-clean, 3.7884636594242855, 0.047523012789275704
+dev-other, 10.053387767920233, 0.04314557616937094
+
+
+Jasper results:
+GPU memory runs out when text-to-text process is running. (Text-to-text uses 2053MiB out of available 4038MiB) 
+
+
+DeepSpeech results:
+Takes too long
