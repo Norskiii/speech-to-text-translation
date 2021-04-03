@@ -95,7 +95,7 @@ def main():
                         help='Use DeepSpeech model (default: QuartzNet)')
     parser.add_argument('-evaluate', dest='evaluate', action='store_const',
                         const=True, default=False,
-                        help='Evaluate model word error rate and time consumption. '
+                        help='Evaluate model word error rate and execution time. '
                              'Given INPUT and/or OUTPUT will be ignored')
 
     args = parser.parse_args()
@@ -106,13 +106,13 @@ def main():
 
     if args.evaluate:
         if args.model == 'deepspeech':
-            write_results_to_file(os.path.join(os.getcwd(), '..', 'LibriSpeech_evaluation_results',
-                                               '-'.join([args.model, 'evaluation.txt'])),
-                                  stt_deepspeech.evaluate(model, EVALUATION_DATASET_PATHS))
+            results = stt_deepspeech.evaluate(model, EVALUATION_DATASET_PATHS)
+            write_results_to_file(os.path.join(os.getcwd(), '..', 'results',
+                                               '-'.join([args.model, 'evaluation.txt'])), results)
         else:
-            write_results_to_file(os.path.join(os.getcwd(), '..', 'LibriSpeech_evaluation_results',
-                                               '-'.join([args.model, 'evaluation.txt'])),
-                                  stt_nemo.evaluate(model, EVALUATION_DATASET_PATHS))
+            results = stt_nemo.evaluate(model, EVALUATION_DATASET_PATHS)
+            write_results_to_file(os.path.join(os.getcwd(), '..', 'results',
+                                               '-'.join([args.model, 'evaluation.txt'])), results)
     else:
         loop(model, args.model, args.i, args.o)
 
