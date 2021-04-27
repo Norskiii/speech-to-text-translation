@@ -5,7 +5,7 @@ Speech-to-text (STT) translation implimented as a part of a Deep Speaking Avatar
 In the baseline version, translation from speech to text is done using an open-source Speech-To-Text engine [DeepSpeech](https://github.com/mozilla/DeepSpeech). 
 
 ## Jasper and QuartzNet
-[NVIDIA NeMo toolkit](https://github.com/NVIDIA/NeMo) offers pre-build Jasper and QuartzNet speech recognition models. Both of which achieve better word-error-rates when compared to DeepSpeech, so most likely one of them will be used for final model.
+[NVIDIA NeMo toolkit](https://github.com/NVIDIA/NeMo) offers pre-build Jasper and QuartzNet speech recognition models. Both of which achieve better word error rates when compared to DeepSpeech. In the end, QuartzNet will be used in the Deep Speaking Avatar project, since it is more parameter efficient when compared to the Jasper model.
 
 ## Requirements
 1. Python 3.8
