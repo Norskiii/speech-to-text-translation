@@ -8,7 +8,7 @@ In the baseline version, translation from speech to text is done using an open-s
 [NVIDIA NeMo toolkit](https://github.com/NVIDIA/NeMo) offers pre-build Jasper and QuartzNet speech recognition models. Both of which achieve better word-error-rates when compared to DeepSpeech, so most likely one of them will be used for final model.
 
 ## Requirements
-1. Python 3.6 or above
+1. Python 3.8
 2. Pip3
 
 ## Setup on Linux
